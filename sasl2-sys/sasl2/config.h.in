@@ -500,6 +500,12 @@
    backward compatibility; new code need not use it. */
 #undef STDC_HEADERS
 
+/* Function prototypes: the shipped configure predates C23 toolchains and
+   never defines PROTOTYPES, which leaves md5global.h's K&R declarations
+   (`extern void f ()`) in place; GCC 15 (alpine 3.24) rejects calls to
+   those. Every supported compiler has prototypes, so define it here. */
+#define PROTOTYPES 1
+
 /* Should we try to dlopen() plugins while statically compiled? */
 #undef TRY_DLOPEN_WHEN_STATIC
 
